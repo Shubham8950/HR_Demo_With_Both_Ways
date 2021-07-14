@@ -1,0 +1,56 @@
+﻿@model List<Allowance>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Save", "Allowance"))
+{
+<div class="col-md-12">
+    <div class="col-md-4">
+        <label>Allowance Name</label>
+        @Html.TextBox("ALLOWANCE_NAME")
+    </div>
+    <div class="col-md-4">
+        <label>Min Value</label>
+        @Html.TextBox("MIN_VALUE")
+    </div>
+    <div class="col-md-4">
+        <label>Max Value</label>
+        @Html.TextBox("MAX_VALUE")
+    </div>
+
+</div>
+<div class="col-md-12">
+    <button type="submit">Save</button>
+
+</div>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                Allowance name
+            </td>
+            <td>
+               Min Value
+            </td>
+            <td>
+               Max Value
+            </td>
+        </tr>
+       
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+
+
+        <tr>
+            <td>@item.ALLOWANCE_NAME</td>
+            <td>@item.MIN_VALUE</td>
+            <td>@item.MAX_VALUE</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
