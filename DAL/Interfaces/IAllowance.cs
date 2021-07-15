@@ -10,5 +10,12 @@ namespace DAL.Interfaces
     public interface IAllowance
     {
         List<Allowance> GetAllowances();
+
+        void SaveAllowances(Allowance model);
+
+        Allowance GetAllowanceById(int SEQID);
+        void UpdateAllowances(Allowance model);
+
+        void DeleteAllowance(int SEQID);
     }
 }
