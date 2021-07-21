@@ -46,7 +46,16 @@ namespace HR_Demo_With_Both_Ways.Controllers
             _allowanceRepository.SaveAllowances(model.Allowance);
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        public ActionResult GetAllowanceById(int id)
+        {
+            var model = new Allowance();
+            if (id > 0)
+            {
+                model = _allowanceRepository.GetAllowanceById(Convert.ToInt32(id));
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Delete(int id)
         {
             _allowanceRepository.DeleteAllowance(id);

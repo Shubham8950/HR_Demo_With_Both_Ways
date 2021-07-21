@@ -55,10 +55,31 @@
             <td>@item.ALLOWANCE_NAME</td>
             <td>@item.MIN_VALUE</td>
             <td>@item.MAX_VALUE</td>
-            <td><a href="/Allowance/Index/@item.SEQID">Edit</a></td>
+            @*<td><a href="/Allowance/Index/@item.SEQID">Edit</a></td>*@
+            <td><a onclick="GetAllowanceById(@item.SEQID)">Edit</a></td>
             <td><a href="/Allowance/Delete/@item.SEQID">Delete</a></td>
         </tr>
         }
     </tbody>
 </table>
 
+<script>
+    function GetAllowanceById(id) {
+        var promises = GetAjaxDataPromise('@Url.Action("GetAllowanceById", "Allowance")', { id: id});
+        promises.done(function (response) {
+            $('#Allowance_ALLOWANCE_NAME').val(response.ALLOWANCE_NAME);
+            $('#Allowance_MIN_VALUE').val(response.MIN_VALUE);
+            $('#Allowance_MAX_VALUE').val(response.MAX_VALUE);
+            $('#Allowance_SEQID').val(response.SEQID);
+        });
+
+    }
+     function GetAjaxDataPromise(url, postData) {
+        debugger;
+        var promise = $.post(url, postData, function (promise, status) {
+        });
+        return promise;
+    };
+  
+
+</script>
