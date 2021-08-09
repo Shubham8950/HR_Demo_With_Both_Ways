@@ -1,0 +1,125 @@
+﻿@model DAL.Models.Feedback
+@{
+    ViewBag.Title = "FeedbackForm";
+}
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+<style>
+
+
+    /*.container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }*/
+
+
+    .radio {
+        display: none;
+    }
+
+        .radio ~ span {
+            font-size: 3rem;
+            filter: grayscale(100);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .radio:checked ~ span {
+            filter: grayscale(0);
+            font-size: 4rem;
+        }
+</style>
+<div class="col-md-12">
+    <h2>FeedbackForm</h2>
+    <h5>Training evalution form</h5>
+    <h5>Your feedback is important</h5>
+</div>
+<div class="container" style="display:flex;text-align:center">
+
+    <div class="item">
+        <label for="radio0">
+            <input class="radio" type="radio" name="Review" id="radio0" value="1">
+            <span>🤬</span>
+        </label>
+    </div>
+
+    <div class="item">
+        <label for="radio1">
+            <input class="radio" type="radio" name="Review"  id="radio1" value="2">
+            <span>🙁</span>
+        </label>
+    </div>
+
+    <div class="item">
+        <label for="radio2">
+            <input class="radio" type="radio" name="Review" id="radio2" value="3">
+            <span>😶</span>
+        </label>
+    </div>
+
+    <div class="item">
+        <label for="radio3">
+            <input class="radio" type="radio" name="Review" id="radio3"  value="4">
+            <span>😁</span>
+        </label>
+    </div>
+
+    <div class="item">
+        <label for="radio4">
+            <input class="radio" type="radio" name="Review"  id="radio4" value="5">
+            <span>😍</span>
+        </label>
+    </div>
+
+</div>
+<h5>Please click a form to provide feedback</h5>
+
+<div class="form-group">
+    <label for="exampleFormControlInput1">Additional Comments</label>
+    <input type="text" class="form-control" id="additionalComments" placeholder="Additional Comments">
+
+</div>
+<div class="form-group">
+    <!-- Submit button -->
+    <input type="button" id="btnFeedback" class="btn btn-primary " value="Submit" />
+    <input type="hidden" id="FeedbackId" value="@Model.Id"/>
+</div>
+
+<h6>Training Type: @Model.Type</h6>
+<h6>Emp Id :@Model.EmployeeEmail</h6>
+<h6>Start Date:  @(Model.StartDate.ToString("dd/MMM/yyyy"))</h6>
+<h6>End Date:@(Model.EndDate.ToString("dd/MMM/yyyy"))</h6>
+<h6>Description : @Model.Description</h6>
+<script>
+    function GetAjaxDataPromise(url, postData) {
+        debugger;
+        var promise = $.post(url, postData, function (promise, status) {
+        });
+        return promise;
+    };
+    $(function () {
+        $("#btnFeedback").click(function () {
+            debugger
+            var promises = GetAjaxDataPromise("/Email/UserFeedback", {
+                FeedbackId: $("#FeedbackId").val(),
+                AdditionalComment: $("#additionalComments").val(),
+                Review: $(".radio:checked").val()
+            });
+            promises.done(function (response) {
+                debugger;
+                alert("Feedback Added");
+            });
+          
+        });
+    });
+</script>
