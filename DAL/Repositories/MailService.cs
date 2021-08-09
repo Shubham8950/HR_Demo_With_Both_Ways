@@ -22,14 +22,9 @@ namespace DAL.Repositories
             var link = verifyUrl;
             var mailSettings = new MailSettings()
             {
-                //Mail = "info@code2night.com",
-                //DisplayName = "Shubham Batra",
-                //Password = "Code2night",
-                //Host = "webmail.code2night.com",
-                //Port = 587
-                Mail = "shubhambatra1994@gmail.com",
-                DisplayName = "Shubham Batra",
-                Password = "wszmjsahxjgmnggj",
+                Mail = "Add your Email",
+                DisplayName = "Add your name",
+                Password = "Add your password",
                 Host = "smtp.gmail.com",
                 Port = 587
             };
